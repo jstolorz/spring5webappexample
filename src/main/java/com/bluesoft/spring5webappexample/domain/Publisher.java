@@ -1,7 +1,9 @@
 package com.bluesoft.spring5webappexample.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -13,6 +15,10 @@ public class Publisher {
 
     @Embedded
     private Address address;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
@@ -44,6 +50,14 @@ public class Publisher {
 
     public void setAddress(final Address address) {
         this.address = address;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(final Set<Book> books) {
+        this.books = books;
     }
 
     @Override
